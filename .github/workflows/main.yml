@@ -55,7 +55,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: /build #${{ steps.create_a_release.outputs.upload_url }}
+          upload_url: / #${{ steps.create_a_release.outputs.upload_url }}
           # The path to the asset you want to upload
           asset_path: build/awxplugins-examples-${{ steps.get_version.outputs.VERSION }}.tar.gz
           # The name of the asset you want to upload
