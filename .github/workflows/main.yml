@@ -59,7 +59,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_a_release.outputs.upload_url }}
           # The path to the asset you want to upload
-          asset_path:  build/awxplugins-examples-${{ steps.get_version.outputs.VERSION }}.tar.gz
+          asset_path:  /home/runner/work/inv_plugin_example/inv_plugin_example/build/awxplugins-examples-${{ steps.get_version.outputs.VERSION }}.tar.gz
           # The name of the asset you want to upload
           asset_name: "awxplugins-examples-${{ steps.get_version.outputs.VERSION }}.tar.gz"
           # The content-type of the asset you want to upload. See the supported Media Types here: https://www.iana.org/assignments/media-types/media-types.xhtml for more information
