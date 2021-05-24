@@ -1,4 +1,5 @@
 import requests
+from requests.auth import HTTPBasicAuth
 import os
 from base64 import b64encode
 
@@ -23,7 +24,7 @@ options:
 
 def mapcitohost(ci):
         return ci["CI model"]["Display value"]
-        
+
 class InventoryModule(BaseInventoryPlugin):
     """A trivial example of an inventory plugin."""
 
@@ -53,10 +54,7 @@ class InventoryModule(BaseInventoryPlugin):
         password = os.environ['ITSM_PASSWORD']
 
         
-
-        userAndPass = b64encode(b"" + username + ":" + password).decode("ascii")
-        headers = { 'Authorization' : 'Basic %s' %  userAndPass }
-        resp = requests.get(url=url, headers=headers)
+        resp = requests.get(url=url, auth = HTTPBasicAuth(username, password))
         data = resp.json()
 
         return {
