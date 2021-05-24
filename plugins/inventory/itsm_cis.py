@@ -21,7 +21,7 @@ options:
 class InventoryModule(BaseInventoryPlugin):
     """A trivial example of an inventory plugin."""
 
-    NAME = 'awxplugins.examples.example_hosts'
+    NAME = 'awxplugins.examples.itsm_cis'
 
     def verify_file(self, path):
         """Verify that the source file can be processed correctly.
@@ -43,7 +43,7 @@ class InventoryModule(BaseInventoryPlugin):
         """
         return {
             "all": {
-                "hosts": ["web1.example.com", "web2.example.com"]
+                "hosts": ["web1.example.com", "web2.example.com","web3.example.com", "web4.example.com"]
             },
             "_meta": {
                 "hostvars": {
@@ -51,6 +51,12 @@ class InventoryModule(BaseInventoryPlugin):
                         "ansible_user": "rdiscala"
                     },
                     "web2.example.com": {
+                        "ansible_user": "rdiscala"
+                    },
+                     "web3.example.com": {
+                        "ansible_user": "rdiscala"
+                    },
+                     "web4.example.com": {
                         "ansible_user": "rdiscala"
                     }
                 }
