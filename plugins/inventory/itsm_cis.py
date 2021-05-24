@@ -102,5 +102,5 @@ class InventoryModule(BaseInventoryPlugin):
         for group_name, group_data in raw_data.items():
             for host_name in group_data['hosts']:
                 self.inventory.add_host(host_name)
-                for var_key, var_val in _meta['hostvars'][host_name].items():
-                    self.inventory.set_variable(host_name, var_key, var_val)
+                # for var_key, var_val in _meta['hostvars'][host_name].items():
+                    # self.inventory.set_variable(host_name, var_key, var_val)
