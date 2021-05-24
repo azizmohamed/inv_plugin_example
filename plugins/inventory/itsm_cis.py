@@ -1,3 +1,7 @@
+import requests
+import os
+from base64 import b64encode
+
 from ansible.plugins.inventory import BaseInventoryPlugin
 
 ANSIBLE_METADATA = {
@@ -17,7 +21,9 @@ description:
 options:
 '''
 
-
+def mapcitohost(ci):
+        return ci["CI model"]["Display value"]
+        
 class InventoryModule(BaseInventoryPlugin):
     """A trivial example of an inventory plugin."""
 
@@ -41,9 +47,21 @@ class InventoryModule(BaseInventoryPlugin):
         Returns:
             dict The host data formatted as expected for an Inventory Script
         """
+
+        url = os.environ['ITSM_URL']
+        username = os.environ['ITSM_USERNAME']
+        password = os.environ['ITSM_PASSWORD']
+
+        
+
+        userAndPass = b64encode(b"" + username + ":" + password).decode("ascii")
+        headers = { 'Authorization' : 'Basic %s' %  userAndPass }
+        resp = requests.get(url=url, headers=headers)
+        data = resp.json()
+
         return {
             "all": {
-                "hosts": ["web1.example.com", "web2.example.com","web3.example.com", "web4.example.com"]
+                "hosts": map(mapcitohost, data["results"])
             },
             "_meta": {
                 "hostvars": {
@@ -62,6 +80,7 @@ class InventoryModule(BaseInventoryPlugin):
                 }
             }
         }
+    
 
     def parse(self, inventory, *args, **kwargs):
         """Parse and populate the inventory with data about hosts.
